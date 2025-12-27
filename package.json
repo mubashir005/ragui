@@ -25,8 +25,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "export": "next build && touch out/.nojekyll",
-    "deploy": "npm run export && gh-pages -d out -t true"
+    "export": "next build",
+    "deploy": "npm run export && gh-pages -d out -t"
   },
   "dependencies": {
     "@next/font": "^14.2.15",
