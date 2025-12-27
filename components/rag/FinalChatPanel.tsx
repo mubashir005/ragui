@@ -98,19 +98,19 @@ export default function FinalChatPanel({ sessionId }: FinalChatPanelProps) {
       className="bg-slate-900/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl shadow-xl overflow-hidden flex flex-col w-full h-full"
     >
       {/* Compact Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/50">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800 bg-slate-900/50 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <h2 className="text-lg font-semibold text-white">Ask Your Documents</h2>
+          <h2 className="text-sm sm:text-base md:text-lg font-semibold text-white">Ask Your Documents</h2>
         </div>
         
         {/* Top-K selector moved to header */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">Results:</span>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <span className="text-xs text-slate-400 hidden sm:inline">Results:</span>
           <select
             value={topK}
             onChange={(e) => setTopK(Number(e.target.value))}
-            className="px-2 py-1 bg-slate-800 border border-slate-700 rounded text-sm text-cyan-400 focus:outline-none focus:border-cyan-400 transition-colors"
+            className="px-2 py-1 bg-slate-800 border border-slate-700 rounded text-xs sm:text-sm text-cyan-400 focus:outline-none focus:border-cyan-400 transition-colors"
           >
             <option value={3}>Top 3</option>
             <option value={5}>Top 5</option>
@@ -120,15 +120,15 @@ export default function FinalChatPanel({ sessionId }: FinalChatPanelProps) {
       </div>
 
       {/* Messages Container - Fixed with internal scroll */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-6 py-4 space-y-4">
+      <div className="flex-1 min-h-0 overflow-y-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4">
         {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center">
-            <div className="w-16 h-16 mb-4 rounded-full bg-cyan-500/10 flex items-center justify-center">
-              <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="flex flex-col items-center justify-center h-full text-center px-4">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mb-3 sm:mb-4 rounded-full bg-cyan-500/10 flex items-center justify-center">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
               </svg>
             </div>
-            <p className="text-slate-400 text-sm">Ask a question about your documents</p>
+            <p className="text-slate-400 text-xs sm:text-sm">Ask a question about your documents</p>
             <p className="text-slate-600 text-xs mt-1">Get instant answers with source citations</p>
           </div>
         ) : (
@@ -140,14 +140,14 @@ export default function FinalChatPanel({ sessionId }: FinalChatPanelProps) {
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[80%] rounded-2xl p-4 ${
+                className={`max-w-[85%] sm:max-w-[80%] rounded-xl sm:rounded-2xl p-3 sm:p-4 ${
                   msg.role === "user"
                     ? "bg-cyan-500/20 border border-cyan-500/30"
                     : "bg-slate-800/70 border border-slate-700"
                 }`}
               >
                 {/* Message content */}
-                <div className="text-sm text-slate-100 leading-relaxed">
+                <div className="text-xs sm:text-sm text-slate-100 leading-relaxed">
                   {msg.content}
                 </div>
                 
@@ -203,10 +203,10 @@ export default function FinalChatPanel({ sessionId }: FinalChatPanelProps) {
       </div>
 
       {/* Input Section - Fixed at bottom */}
-      <div className="px-6 py-4 border-t border-slate-800 bg-slate-900/50">
+      <div className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 border-t border-slate-800 bg-slate-900/50 shrink-0">
         {/* Error message */}
         {error && (
-          <div className="mb-3 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-lg text-sm text-red-300 flex items-center gap-2">
+          <div className="mb-2 sm:mb-3 px-3 sm:px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-lg text-xs sm:text-sm text-red-300 flex items-center gap-2">
             <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
             </svg>
@@ -222,12 +222,12 @@ export default function FinalChatPanel({ sessionId }: FinalChatPanelProps) {
             onKeyDown={(e) => e.key === "Enter" && !isLoading && handleSend()}
             placeholder="Type your question..."
             disabled={isLoading}
-            className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 disabled:opacity-50 transition-all"
+            className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 disabled:opacity-50 transition-all"
           />
           <button
             onClick={handleSend}
             disabled={!query.trim() || isLoading}
-            className={`px-6 py-3 rounded-xl font-medium text-sm transition-all ${
+            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium text-xs sm:text-sm transition-all ${
               query.trim() && !isLoading
                 ? "bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-lg hover:shadow-cyan-400/30"
                 : "bg-slate-800 text-slate-600 cursor-not-allowed"

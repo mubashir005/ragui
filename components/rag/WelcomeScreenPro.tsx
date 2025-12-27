@@ -199,7 +199,7 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="relative min-h-screen w-full bg-slate-950 flex flex-col items-center justify-center overflow-hidden font-sans text-white"
+      className="relative h-screen w-full bg-slate-950 flex flex-col items-center justify-center overflow-hidden font-sans text-white"
     >
       
       {/* 1. Animated Background Grid */}
@@ -212,14 +212,14 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
       </div>
 
       <motion.div 
-        className="z-10 flex flex-col items-center max-w-2xl px-6 text-center"
+        className="z-10 flex flex-col items-center max-w-2xl px-4 sm:px-6 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         
         {/* 2. Badge / Tagline */}
-        <motion.div variants={itemVariants} className="mb-8">
+        <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
           <span className="px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-widest uppercase">
             System Online • v2.4.0
           </span>
@@ -228,21 +228,21 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
         {/* 3. The Hero Bot - Large Size with Spotlight */}
         <motion.div 
           variants={botVariants}
-          className="relative mb-10"
+          className="relative mb-6 sm:mb-8"
         >
           {/* Spotlight Glow behind bot */}
           <div className="absolute inset-0 bg-cyan-400/20 blur-3xl rounded-full scale-110" />
           
           {/* The SVG Component */}
-          <TeacherBot className="w-64 h-64 md:w-80 md:h-80 drop-shadow-2xl relative z-10" />
+          <TeacherBot className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 drop-shadow-2xl relative z-10" />
         </motion.div>
 
         {/* 4. Main Titles */}
-        <motion.div variants={itemVariants} className="space-y-4">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+        <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white">
             RAG Agent <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-indigo-500">Lab</span>
           </h1>
-          <p className="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-lg mx-auto leading-relaxed px-4">
             Your personal AI architect. Initialize the pipeline to begin ingestion, processing, and semantic retrieval.
           </p>
         </motion.div>
@@ -250,13 +250,13 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
         {/* 5. Call to Action Button */}
         <motion.div 
           variants={itemVariants}
-          className="mt-12"
+          className="mt-6 sm:mt-8"
         >
           <button 
             onClick={onStart}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-xl transition-all duration-300"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-transparent overflow-hidden rounded-xl transition-all duration-300"
           >
             {/* Button Background & Border Gradient */}
             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-cyan-500/10 to-indigo-500/10 border border-cyan-500/30 group-hover:border-cyan-400 rounded-xl transition-all duration-300"></div>
@@ -264,12 +264,12 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
             {/* Hover Fill Effect */}
             <div className={`absolute inset-0 w-full h-full bg-cyan-500/10 transition-transform duration-300 origin-left ${isHovering ? 'scale-x-100' : 'scale-x-0'}`}></div>
 
-            <div className="relative flex items-center space-x-3">
-              <span className="text-cyan-100 font-semibold tracking-wide group-hover:text-white transition-colors">
+            <div className="relative flex items-center space-x-2 sm:space-x-3">
+              <span className="text-cyan-100 text-sm sm:text-base font-semibold tracking-wide group-hover:text-white transition-colors">
                 INITIALIZE PIPELINE
               </span>
               <svg 
-                className={`w-5 h-5 text-cyan-400 transform transition-transform duration-300 ${isHovering ? 'translate-x-1' : ''}`} 
+                className={`w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transform transition-transform duration-300 ${isHovering ? 'translate-x-1' : ''}`} 
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -281,9 +281,9 @@ const WelcomeScreenPro: React.FC<WelcomeScreenProProps> = ({ onStart }) => {
         {/* 6. Developer Attribution */}
         <motion.div 
           variants={itemVariants}
-          className="mt-8 flex flex-col items-center gap-2"
+          className="mt-6 sm:mt-8 flex flex-col items-center gap-2"
         >
-          <div className="flex items-center gap-2 text-sm text-cyan-400/70">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-cyan-400/70">
             <span className="tracking-wide">Developed by</span>
             <span className="font-semibold text-cyan-300">Mubashir-Ul-Hassan</span>
           </div>

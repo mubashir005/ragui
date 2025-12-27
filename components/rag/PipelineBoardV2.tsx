@@ -259,12 +259,12 @@ export default function PipelineBoardV2({ onComplete, sessionId, onSessionReset 
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 border-b border-cyan-400/20 bg-slate-900/50 backdrop-blur-xl px-8 py-6"
+        className="relative z-10 border-b border-cyan-400/20 bg-slate-900/50 backdrop-blur-xl px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6"
       >
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-cyan-400 font-mono">▸ RAG PIPELINE</h1>
-            <p className="text-sm text-slate-400 font-mono mt-1">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-cyan-400 font-mono">▸ RAG PIPELINE</h1>
+            <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
               Interactive Demo • Stage {activeStage + 1} of {STAGES.length}
             </p>
           </div>
@@ -358,10 +358,10 @@ export default function PipelineBoardV2({ onComplete, sessionId, onSessionReset 
       </AnimatePresence>
 
       {/* Main Pipeline Container */}
-      <main ref={containerRef} className="relative z-10 max-w-7xl mx-auto px-8 py-16">
-        {/* Connector Line (SVG Path) */}
+      <main ref={containerRef} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        {/* Connector Line (SVG Path) - Hidden on mobile */}
         <svg
-          className="absolute top-32 left-0 w-full h-32 pointer-events-none"
+          className="hidden md:block absolute top-24 sm:top-28 md:top-32 left-0 w-full h-32 pointer-events-none"
           style={{ zIndex: 5 }}
         >
           <motion.path
@@ -383,9 +383,9 @@ export default function PipelineBoardV2({ onComplete, sessionId, onSessionReset 
           </defs>
         </svg>
 
-        {/* Hero Robot Agent */}
+        {/* Hero Robot Agent - Hidden on mobile to avoid overlap */}
         <motion.div
-          className="absolute top-20 z-20 pointer-events-none"
+          className="hidden md:block absolute top-16 sm:top-18 md:top-20 z-20 pointer-events-none"
           initial={{ x: 0 }}
           animate={{
             x: stagePositions[robotPosition] || 0,
@@ -452,16 +452,22 @@ export default function PipelineBoardV2({ onComplete, sessionId, onSessionReset 
               )}
             </AnimatePresence>
 
-            {/* Narration Bubble - Right next to robot */}
+            {/* Narration Bubble - Position based on robot stage */}
             <AnimatePresence>
               {showNarration && (
                 <motion.div
-                  initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                  initial={{ opacity: 0, x: robotPosition === 2 ? 20 : -20, scale: 0.8 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: 20, scale: 0.8 }}
+                  exit={{ opacity: 0, x: robotPosition === 2 ? -20 : 20, scale: 0.8 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="absolute left-full ml-8 top-0 w-80 z-40"
-                  style={{ transformOrigin: "left center" }}
+                  className={`absolute top-0 w-80 z-50 ${
+                    robotPosition === 2 
+                      ? 'right-full mr-8' 
+                      : 'left-full ml-8'
+                  }`}
+                  style={{ 
+                    transformOrigin: robotPosition === 2 ? "right center" : "left center"
+                  }}
                 >
                   <RobotSystemBubble
                     lines={STAGES[activeStage].narration}
@@ -474,7 +480,7 @@ export default function PipelineBoardV2({ onComplete, sessionId, onSessionReset 
         </motion.div>
 
         {/* Stage Nodes */}
-        <div className="relative grid grid-cols-3 gap-8 mt-48">
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8 md:mt-32 lg:mt-40 xl:mt-48">
           <AnimatePresence mode="wait">
             {STAGES.map((stage, idx) => {
               const isActive = activeStage === idx;
