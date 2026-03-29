@@ -33,6 +33,8 @@ jobs:
 
       - name: Build Next.js app
         run: npm run build
+        env:
+          NEXT_PUBLIC_RAG_API_BASE_URL: ${{ secrets.BACKEND_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
