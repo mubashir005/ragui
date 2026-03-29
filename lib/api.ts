@@ -1,6 +1,12 @@
 export function apiBaseUrl() {
   const base = process.env.NEXT_PUBLIC_RAG_API_BASE_URL;
-  if (!base) throw new Error("Missing NEXT_PUBLIC_RAG_API_BASE_URL in .env.local");
+  if (!base) {
+    // Fallback avoids hard crash in static builds when env is not injected.
+    console.warn(
+      "NEXT_PUBLIC_RAG_API_BASE_URL is missing; falling back to EC2 API URL."
+    );
+    return "http://3.219.242.70:8000";
+  }
   return base.replace(/\/+$/, "");
 }
 
